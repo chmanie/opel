@@ -1,13 +1,5 @@
 #!/usr/bin/env node
 
-/*
-TODO:
-- provide option to just show available projects
-- get rid of -c option as customerId it is available in a project. get project first then add hours
-
-*/
-
-
 'use strict';
 
 var program = require('commander'),
@@ -18,9 +10,9 @@ var program = require('commander'),
     cors = require('connect-cors');
 
 program
-  .version('0.1.0')
-  .option('-e, --endpoint <n>', 'Remote API endpoint (full URL)', String)
-  .option('-p, --port <n>', 'Port to listen on', parseInt)
+  .version('0.1.1')
+  .option('-e, --endpoint <n>', 'Remote API endpoint (full URL, required)', String)
+  .option('-p, --port <n>', 'Port to listen on (default: 8090)', parseInt)
   .parse(process.argv);
 
 colors.setTheme({
@@ -49,8 +41,8 @@ var out = {
 
 var app = connect();
 
-if (!program.endpoint || !program.endpoint.match(/^https?\:\/\//)) return out.fatal('Please define a valid API endpoint');
-program.port = program.port || 3000;
+if (!program.endpoint || !program.endpoint.match(/^https?\:\/\//)) return out.fatal('Please define a valid API endpoint (starting with http(s))');
+program.port = program.port || 8090;
 
 app.use(cors());
 
