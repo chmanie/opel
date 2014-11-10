@@ -1,0 +1,28 @@
+{
+  "name": "opel",
+  "version": "0.1.0",
+  "description": "(Very) simple proxy to redirect api calls (circumventing cors errors)",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "opel": "bin/cmd.js"
+  },
+  "keywords": [
+    "cors",
+    "proxy",
+    "http",
+    "redirect",
+    "api",
+    "development"
+  ],
+  "author": "Christian Maniewski <chmanie@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "colors": "^1.0.3",
+    "commander": "^2.5.0",
+    "connect": "^3.3.3",
+    "connect-cors": "^0.5.6",
+    "request": "^2.47.0"
+  }
+}
