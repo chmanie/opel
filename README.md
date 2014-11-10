@@ -4,7 +4,7 @@
 
 opel is designed to help you accessing (http) APIs that do not have set CORS-Headers (yet).
 
-It's useful for trying out stuff, playing around with some quick and dirty code or for development on a local machine.
+It's useful for trying out stuff, playing around with some APIs or for development on a local machine. It's not suitable for piping whole website content through it (which is not a real use-case either).
 
 **Please use this tool resposibly and do not use it in a production environment (e.g. on a server).**
 
