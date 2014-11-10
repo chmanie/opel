@@ -1,6 +1,6 @@
 {
   "name": "opel",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "(Very) simple proxy to redirect api calls (circumventing cors errors)",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
