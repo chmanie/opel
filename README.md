@@ -38,6 +38,7 @@ $ curl http://localhost:8888/v1/resource  #resolves to http://api.myserver.com/v
 
 ### To-Do
 * Tests
+* Currently only the GET method is mapped. Need to add the other stuff (POST, PUT, DELETE, ...)
 
 ### License
 
