@@ -10,9 +10,9 @@ var program = require('commander'),
     cors = require('connect-cors');
 
 program
-  .version('0.1.1')
-  .option('-e, --endpoint <n>', 'Remote API endpoint (full URL, required)', String)
-  .option('-p, --port <n>', 'Port to listen on (default: 8090)', parseInt)
+  .version('0.1.2')
+  .option('-e, --endpoint', 'Remote API endpoint (full URL, required)', String)
+  .option('-p, --port [number]', 'Port to listen on (default: 8090)', parseInt)
   .parse(process.argv);
 
 colors.setTheme({
