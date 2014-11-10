@@ -1,6 +1,6 @@
 {
   "name": "opel",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "(Very) simple proxy to redirect api calls (circumventing cors errors)",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -16,7 +16,11 @@
     "api",
     "development"
   ],
-  "author": "Christian Maniewski <chmanie@gmail.com>",
+  "author": {
+    "name": "Christian Maniewski",
+    "email": "christian@maniewski.de",
+    "url": "http://maniewski.de"
+  },
   "license": "MIT",
   "dependencies": {
     "colors": "^1.0.3",
@@ -24,11 +28,6 @@
     "connect": "^3.3.3",
     "connect-cors": "^0.5.6",
     "request": "^2.47.0"
-  },
-  "author": {
-    "name": "Christian Maniewski",
-    "email": "christian@maniewski.de",
-    "url": "http://maniewski.de"
   },
   "repository": {
     "type": "git",
