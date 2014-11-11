@@ -10,6 +10,8 @@ It's useful for trying out stuff, playing around with some APIs or for developme
 
 While opel is running, all requests to http://localhost:8090 and sub-routes are mapped to the given endpoint. Appropriate CORS Headers are set for all origins.
 
+You can also specify some custom headers using a json file via the -h option (great for authorization headers).
+
 ### Install
 
 ```
@@ -19,15 +21,15 @@ npm install -g opel
 
 ### Use
 ```
-Usage: opel [options]
+Usage: cmd [options]
 
-  Options:
+Options:
 
-    -h, --help          output usage information
-    -V, --version       output the version number
-    -e, --endpoint <n>  Remote API endpoint (full URL, required)
-    -p, --port <n>      Port to listen on (default: 8090)
-
+  -h, --help          output usage information
+  -V, --version       output the version number
+  -e, --endpoint <s>  Remote API endpoint (full URL, required)
+  -p, --port [n]      Port to listen on (default: 8090)
+  -h, --headers [f]   JSON file containing additional headers send to the server
 ```
 
 ### Example
@@ -38,7 +40,6 @@ $ curl http://localhost:8888/v1/resource  #resolves to http://api.myserver.com/v
 
 ### To-Do
 * Tests
-* Currently only the GET method is mapped. Need to add the other stuff (POST, PUT, DELETE, ...)
 
 ### License
 
