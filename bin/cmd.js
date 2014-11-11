@@ -10,7 +10,7 @@ var program = require('commander'),
     merge = require('merge');
 
 program
-  .version('0.2.0')
+  .version('0.2.1')
   .option('-e, --endpoint <s>', 'Remote API endpoint (full URL, required)', String)
   .option('-p, --port [n]', 'Port to listen on (default: 8090)', parseInt)
   .option('-h, --headers [f]', 'JSON file containing additional headers send to the server', String)
@@ -55,23 +55,28 @@ if (!program.endpoint || !program.endpoint.match(/^https?\:\/\//)) {
 }
 program.port = program.port || 8090;
 
+var headers;
+
 if (program.headers) {
-  var headers;
   try {
     headers = require('./' + program.headers);
   } catch (e) {
     return out.fatal('Could not read file ' + program.headers + '. Is it proper JSON?');
   }
+} else {
+  headers = {};
 }
 
 app.use(function(req, res){
 
-  merge(program.headers, req.headers);
+  delete req.headers['host'];
+
+  merge(headers, req.headers);
 
   var options = {
     url: program.endpoint + req.url,
     method: req.method,
-    headers: headers || {}
+    headers: headers
   };
 
   req.pipe(request(options)).on('response', function (response) {
