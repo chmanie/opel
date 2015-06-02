@@ -10,10 +10,11 @@ var program = require('commander'),
     merge = require('merge');
 
 program
-  .version('0.2.1')
+  .version('0.3.0')
   .option('-e, --endpoint <s>', 'Remote API endpoint (full URL, required)', String)
   .option('-p, --port [n]', 'Port to listen on (default: 8090)', parseInt)
   .option('-h, --headers [f]', 'JSON file containing additional headers send to the server', String)
+  .option('-o, --origin <s>', 'Origin to allow in access-control-allow-origin header (default: *)')
   .parse(process.argv);
 
 colors.setTheme({
@@ -41,11 +42,12 @@ var out = {
 };
 
 var corsHeaders = {
-  'access-control-allow-origin': '*',
+  'access-control-allow-origin': program.origin || '*',
   'access-control-allow-headers': 'Authorization, Content-Type, If-None-Match,' +
     'X-Requested-With, Cache-Control, Content-Type, Content-Range, Content-Disposition' +
-    'Content-Description',
-  'access-control-allow-methods': 'GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS'
+    'Content-Description, withCredentials',
+  'access-control-allow-methods': 'GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS',
+  'access-control-allow-credentials': 'true',
 };
 
 var app = connect();
@@ -83,6 +85,10 @@ app.use(function(req, res){
 
     merge(response.headers, corsHeaders);
 
+    if (response.headers && response.headers['set-cookie'] && response.headers['set-cookie'][0]) {
+      response.headers['set-cookie'][0] = response.headers['set-cookie'][0].replace(/Path.+?;/, '');
+    }
+
     res.writeHead(response.statusCode, response.headers);
 
     response.pipe(res);
@@ -90,6 +96,9 @@ app.use(function(req, res){
 
 });
 
+app.on('err', function (err) {
+  console.log(err);
+});
 
 //create node.js http server and listen on port
 http.createServer(app).listen(program.port, function () {
