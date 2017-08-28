@@ -6,6 +6,8 @@ opel is designed to help you accessing (http) APIs that do not have set CORS-Hea
 
 It's useful for trying out stuff, playing around with some APIs or for development on a local machine. It's not suitable for piping whole website content through it (which is not a real use-case either).
 
+You can also use it to fake OPTIONS requests when a browser triggers a preflight request, but the server which does not understand it.
+
 **Please use this tool resposibly and do not use it in a production environment (e.g. on a server).**
 
 While opel is running, all requests to http://localhost:8090 and sub-routes are mapped to the given endpoint. Appropriate CORS Headers are set for all origins.
@@ -25,11 +27,12 @@ Usage: cmd [options]
 
 Options:
 
-  -h, --help          output usage information
-  -V, --version       output the version number
-  -e, --endpoint <s>  Remote API endpoint (full URL, required)
-  -p, --port [n]      Port to listen on (default: 8090)
-  -h, --headers [f]   JSON file containing additional headers send to the server
+  -h, --help            output usage information
+  -V, --version         output the version number
+  -e, --endpoint <s>    Remote API endpoint (full URL, required)
+  -p, --port [n]        Port to listen on (default: 8090)
+  -f, --fake-preflight  Fake preflight requests and respond to OPTIONS with CORS headers
+  -h, --headers [f]     JSON file containing additional headers send to the server
 ```
 
 ### Example
