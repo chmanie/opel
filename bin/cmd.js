@@ -4,6 +4,7 @@
 
 var program = require('commander'),
     http = require('http'),
+    path = require('path'),
     colors = require('colors'),
     connect = require('connect'),
     request = require('request'),
@@ -61,7 +62,7 @@ var headers;
 
 if (program.headers) {
   try {
-    headers = require('./' + program.headers);
+    headers = require(path.resolve(process.cwd(), program.headers));
   } catch (e) {
     return out.fatal('Could not read file ' + program.headers + '. Is it proper JSON?');
   }
