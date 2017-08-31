@@ -14,6 +14,7 @@ program
   .version('0.3.0')
   .option('-e, --endpoint <s>', 'Remote API endpoint (full URL, required)', String)
   .option('-p, --port [n]', 'Port to listen on (default: 8090)', parseInt)
+  .option('-f, --fake-preflight', 'Fake OPTIONS preflight')
   .option('-h, --headers [f]', 'JSON file containing additional headers send to the server', String)
   .option('-o, --origin <s>', 'Origin to allow in access-control-allow-origin header (default: *)')
   .parse(process.argv);
@@ -71,6 +72,11 @@ if (program.headers) {
 }
 
 app.use(function(req, res){
+
+  if (req.method === "OPTIONS" && program.fakePreflight) {
+    res.writeHead(200, corsHeaders);
+    return res.end();
+  }
 
   delete req.headers['host'];
 
